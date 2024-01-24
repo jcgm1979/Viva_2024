@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "80771362941",
+    "project_id": "viva2024-ca8e2",
+    "storage_bucket": "viva2024-ca8e2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:80771362941:android:c59eec1ea397e3fb990114",
+        "android_client_info": {
+          "package_name": "com.example.viva_2024"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBxZ1J6SO44XeCoIkNwa_Ka_rmqkxIqk68"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:rounded_loading_button/rounded_loading_button.dart';
 import 'package:provider/provider.dart';
+import 'package:rounded_loading_button/rounded_loading_button.dart';
 import 'package:viva_2024/providers/signIn_provider.dart';
 
 import '../providers/internet_provider.dart';
@@ -27,6 +27,7 @@ class _LoginScreenState extends State<LoginScreen> {
       RoundedLoadingButtonController();
 
   bool isGoogleButtonLoading = false;
+  bool isAppleButtonLoading = false;
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
@@ -150,7 +151,9 @@ class _LoginScreenState extends State<LoginScreen> {
                       Align(
                         alignment: const AlignmentDirectional(0, 0),
                         child: ButtonWidget(
-                          onPressed: () {},
+                          onPressed: () {
+                            isGoogleButtonLoading ? null : handleAppleSignIn();
+                          },
                           text: 'Ingresa con Apple',
                           icon: const FaIcon(
                             FontAwesomeIcons.apple,
@@ -259,6 +262,53 @@ class _LoginScreenState extends State<LoginScreen> {
             }
             setState(() {
               isGoogleButtonLoading = false;
+            });
+          });
+        }
+      });
+    }
+  }
+
+  // handling google sigin in
+  Future handleAppleSignIn() async {
+    setState(() {
+      isAppleButtonLoading = true;
+    });
+    final sp = context.read<SignInProvider>();
+    final ip = context.read<InternetProvider>();
+    await ip.checkInternetConnection();
+
+    if (ip.hasInternet == false) {
+      // ignore: use_build_context_synchronously
+      openSnackbar(context, "Check your Internet connection", Colors.red[300]);
+      googleController.reset();
+    } else {
+      await sp.signInWithApple().then((value) {
+        if (sp.hasError == true) {
+          openSnackbar(context, sp.errorCode.toString(), Colors.red[300]);
+          googleController.reset();
+        } else {
+          // checking whether user exists or not
+          sp.checkUserExists().then((value) async {
+            if (value == true) {
+              // user exists
+              await sp.getUserDataFromFirestore(sp.uid).then((value) => sp
+                  .saveDataToSharedPreferences()
+                  .then((value) => sp.setSignIn().then((value) {
+                        googleController.success();
+                        handleAfterSignIn();
+                      })));
+            } else {
+              // user does not exist
+              sp.saveDataToFirestore().then((value) => sp
+                  .saveDataToSharedPreferences()
+                  .then((value) => sp.setSignIn().then((value) {
+                        googleController.success();
+                        handleAfterSignIn();
+                      })));
+            }
+            setState(() {
+              isAppleButtonLoading = false;
             });
           });
         }

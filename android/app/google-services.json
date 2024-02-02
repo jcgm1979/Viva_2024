@@ -1,26 +1,87 @@
 {
   "project_info": {
-    "project_number": "80771362941",
-    "project_id": "viva2024-ca8e2",
-    "storage_bucket": "viva2024-ca8e2.appspot.com"
+    "project_number": "802915754045",
+    "project_id": "viva-fm-smart-ced7c",
+    "storage_bucket": "viva-fm-smart-ced7c.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:80771362941:android:c59eec1ea397e3fb990114",
+        "mobilesdk_app_id": "1:802915754045:android:147933ccada653cbd08a54",
         "android_client_info": {
-          "package_name": "com.example.viva_2024"
+          "package_name": "crdappsperu.viva_fm_smart"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "802915754045-55jg2sa27psmg0pn5m0mvb7omins5kb7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "crdappsperu.viva_fm_smart",
+            "certificate_hash": "34e5b2182af2bc24104c568ff6f45da90455e3b2"
+          }
+        },
+        {
+          "client_id": "802915754045-co5p06st2np16oekhov4as74albiid8d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
-          "current_key": "AIzaSyBxZ1J6SO44XeCoIkNwa_Ka_rmqkxIqk68"
+          "current_key": "AIzaSyA-3OEpqJQ6rUPITOntt8x3KnS8B7xFEGg"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "802915754045-3fbn9l77fb8m53t1avc5pfg8ob7fniqj.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "802915754045-4dn6fkr7i5m92v2vdd5jgf6sce48i6ee.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.viva2024"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:802915754045:android:297d50917fcff94fd08a54",
+        "android_client_info": {
+          "package_name": "crdappsperu.viva_fm_smart.dev"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "802915754045-co5p06st2np16oekhov4as74albiid8d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA-3OEpqJQ6rUPITOntt8x3KnS8B7xFEGg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "802915754045-3fbn9l77fb8m53t1avc5pfg8ob7fniqj.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "802915754045-4dn6fkr7i5m92v2vdd5jgf6sce48i6ee.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.viva2024"
+              }
+            }
+          ]
         }
       }
     }

@@ -622,7 +622,7 @@ class _RadioScreenState extends State<RadioScreen> {
                                             ),
                                             onPressed: () async {
                                               //Share.share(
-                                              //'Te comparto mi radio favorita para que te acompañe todos los dias ESTÉS DONDE ESTÉS. Descarga el app aqui: https://play.google.com/store/apps/details?id=crdappsperu.viva_fm_smart');
+                                              //'Te comparto mi radio favorita para que te acompañe todos los dias ESTÉS DONDE ESTÉS. Descarga el app aqui: https://play.google.com/store/apps/details?id=com.crdappsperu.viva-fm-smart');
                                             },
                                           ),
                                           Text('Compárteme',

@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -101,6 +100,52 @@ class SignInProvider extends ChangeNotifier {
     } else {
       _hasError = true;
       notifyListeners();
+    }
+  }
+
+  Future<UserCredential> getCredentials() async {
+    AppleAuthProvider appleProvider = AppleAuthProvider();
+    appleProvider = appleProvider.addScope('email');
+    appleProvider = appleProvider.addScope('name');
+    final credential =
+        await FirebaseAuth.instance.signInWithProvider(appleProvider);
+    return credential;
+  }
+
+  // sign in with google
+  Future signInWithApple() async {
+    final userCredentials = await getCredentials();
+    try {
+      final User userDetails =
+          (await firebaseAuth.signInWithCredential(userCredentials.credential!))
+              .user!;
+
+      _name = userDetails.displayName;
+      _email = userDetails.email;
+      _imageUrl = userDetails.photoURL;
+      _provider = 'APPLE';
+      _uid = userDetails.uid;
+
+      notifyListeners();
+    } on FirebaseAuthException catch (e) {
+      switch (e.code) {
+        case "account-exists-with-different-credential":
+          _errorCode =
+              "You already have an account with us. Use correct provider";
+          _hasError = true;
+          notifyListeners();
+          break;
+
+        case "null":
+          _errorCode = "Some unexpected error while trying to sign in";
+          _hasError = true;
+          notifyListeners();
+          break;
+        default:
+          _errorCode = e.toString();
+          _hasError = true;
+          notifyListeners();
+      }
     }
   }
 

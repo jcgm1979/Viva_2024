@@ -17,7 +17,10 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      return web;
+      throw UnsupportedError(
+        'DefaultFirebaseOptions have not been configured for web - '
+        'you can reconfigure this by running the FlutterFire CLI again.',
+      );
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
@@ -25,7 +28,10 @@ class DefaultFirebaseOptions {
       case TargetPlatform.iOS:
         return ios;
       case TargetPlatform.macOS:
-        return macos;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for macos - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.windows:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for windows - '
@@ -43,39 +49,22 @@ class DefaultFirebaseOptions {
     }
   }
 
-  static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyCwG1lTIibVjsL7CqsWGt1KwibdYWNN3oI',
-    appId: '1:80771362941:web:cebc1b29c0c29854990114',
-    messagingSenderId: '80771362941',
-    projectId: 'viva2024-ca8e2',
-    authDomain: 'viva2024-ca8e2.firebaseapp.com',
-    storageBucket: 'viva2024-ca8e2.appspot.com',
-    measurementId: 'G-JT8EXXJ5SL',
-  );
-
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyBxZ1J6SO44XeCoIkNwa_Ka_rmqkxIqk68',
-    appId: '1:80771362941:android:c59eec1ea397e3fb990114',
-    messagingSenderId: '80771362941',
-    projectId: 'viva2024-ca8e2',
-    storageBucket: 'viva2024-ca8e2.appspot.com',
+    apiKey: 'AIzaSyA-3OEpqJQ6rUPITOntt8x3KnS8B7xFEGg',
+    appId: '1:802915754045:android:297d50917fcff94fd08a54',
+    messagingSenderId: '802915754045',
+    projectId: 'viva-fm-smart-ced7c',
+    storageBucket: 'viva-fm-smart-ced7c.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyDivi5U4Op8RDq2xaMlbG9K3YpNczT5Ysw',
-    appId: '1:80771362941:ios:bce742171ce045d4990114',
-    messagingSenderId: '80771362941',
-    projectId: 'viva2024-ca8e2',
-    storageBucket: 'viva2024-ca8e2.appspot.com',
-    iosBundleId: 'com.example.viva2024',
-  );
-
-  static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyDivi5U4Op8RDq2xaMlbG9K3YpNczT5Ysw',
-    appId: '1:80771362941:ios:19220c1bf63f5b8a990114',
-    messagingSenderId: '80771362941',
-    projectId: 'viva2024-ca8e2',
-    storageBucket: 'viva2024-ca8e2.appspot.com',
-    iosBundleId: 'com.example.viva2024.RunnerTests',
+    apiKey: 'AIzaSyAKDQBpxui_Ga0cUkMcfXRG5Rfn6IuqGew',
+    appId: '1:802915754045:ios:60c1cc5b86931d62d08a54',
+    messagingSenderId: '802915754045',
+    projectId: 'viva-fm-smart-ced7c',
+    storageBucket: 'viva-fm-smart-ced7c.appspot.com',
+    androidClientId: '802915754045-55jg2sa27psmg0pn5m0mvb7omins5kb7.apps.googleusercontent.com',
+    iosClientId: '802915754045-gapjrrfe1h690ki1jagrpu6dpikr6e67.apps.googleusercontent.com',
+    iosBundleId: 'com.crdappsperu.viva-fm-smart',
   );
 }

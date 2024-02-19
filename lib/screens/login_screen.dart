@@ -39,185 +39,193 @@ class _LoginScreenState extends State<LoginScreen> {
     // Calcula el valor de padding proporcional al tamaño de la pantalla
     double paddingValue = screenWidth * paddingPercentage;
 
-    return Scaffold(
-      body: Stack(
-        children: [
-          Container(
-            width: double.infinity,
-            height: double.infinity,
-            decoration: const BoxDecoration(color: Colors.black38),
-            child: Image.asset(
-              'assets/bk-login.png',
-              width: 100,
-              height: 100,
-              fit: BoxFit.cover,
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.only(top: screenHeight * 0.15),
-            child: Container(
+    return PopScope(
+      canPop: false,
+      child: Scaffold(
+        body: Stack(
+          children: [
+            Container(
               width: double.infinity,
-              height: screenHeight * 0.15,
-              decoration: const BoxDecoration(
-                color: Color(0x00FFFFFF),
-                shape: BoxShape.rectangle,
-              ),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Container(
-                    width: double.infinity,
-                    height: screenHeight * 0.09,
-                    decoration: const BoxDecoration(
-                      color: Color(0x00FFFFFF),
-                    ),
-                    child: Image.asset(
-                      'assets/logo-horizontal-2023.png',
-                      fit: BoxFit.contain,
-                    ),
-                  ),
-                  Container(
-                    width: double.infinity,
-                    height: screenHeight * 0.03,
-                    decoration: const BoxDecoration(
-                      color: Color(0x00FFFFFF),
-                    ),
-                    child: Text('La primera radio smart del Perú',
-                        textAlign: TextAlign.center,
-                        style: GoogleFonts.poppins(
-                          textStyle: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 12,
-                              fontWeight: FontWeight.bold),
-                        )),
-                  ),
-                ],
+              height: double.infinity,
+              decoration: const BoxDecoration(color: Colors.black38),
+              child: Image.asset(
+                'assets/bk-login.png',
+                width: 100,
+                height: 100,
+                fit: BoxFit.cover,
               ),
             ),
-          ),
-          Padding(
-            padding: EdgeInsets.only(top: paddingValue * 10),
-            child: SizedBox(
-              width: double.infinity,
-              child: Center(
-                child: Container(
-                  width: screenWidth * 1,
-                  height: screenHeight * 0.2,
-                  decoration: const BoxDecoration(
-                      //color: Colors.white38,
+            Padding(
+              padding: EdgeInsets.only(top: screenHeight * 0.15),
+              child: Container(
+                width: double.infinity,
+                height: screenHeight * 0.15,
+                decoration: const BoxDecoration(
+                  color: Color(0x00FFFFFF),
+                  shape: BoxShape.rectangle,
+                ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Container(
+                      width: double.infinity,
+                      height: screenHeight * 0.09,
+                      decoration: const BoxDecoration(
+                        color: Color(0x00FFFFFF),
                       ),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Align(
-                        alignment: const AlignmentDirectional(0, 0),
-                        child: ButtonWidget(
-                          onPressed: () {
-                            isGoogleButtonLoading ? null : handleGoogleSignIn();
-                          },
-                          text: 'Ingresa con Google',
-                          icon: isGoogleButtonLoading
-                              ? const SpinKitCircle(
-                                  color: Colors.white,
-                                  size: 25.0,
-                                )
-                              : const Icon(
-                                  FontAwesomeIcons.google,
-                                  size: 20,
-                                  color: Colors.white,
-                                ),
-                          options: const ButtonOptions(
-                            iconPadding: EdgeInsets.only(left: 20),
-                            width: 300,
-                            height: 40,
-                            color: Colors.white10,
-                            borderSide: BorderSide(
-                              color: Colors.white,
-                              width: 1,
+                      child: Image.asset(
+                        'assets/logo-horizontal-2023.png',
+                        fit: BoxFit.contain,
+                      ),
+                    ),
+                    Container(
+                      width: double.infinity,
+                      height: screenHeight * 0.03,
+                      decoration: const BoxDecoration(
+                        color: Color(0x00FFFFFF),
+                      ),
+                      child: Text('La primera radio smart del Perú',
+                          textAlign: TextAlign.center,
+                          style: GoogleFonts.poppins(
+                            textStyle: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold),
+                          )),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(top: paddingValue * 10),
+              child: SizedBox(
+                width: double.infinity,
+                child: Center(
+                  child: Container(
+                    width: screenWidth * 1,
+                    height: screenHeight * 0.2,
+                    decoration: const BoxDecoration(
+                        //color: Colors.white38,
+                        ),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Align(
+                          alignment: const AlignmentDirectional(0, 0),
+                          child: ButtonWidget(
+                            onPressed: () {
+                              isGoogleButtonLoading
+                                  ? null
+                                  : handleGoogleSignIn();
+                            },
+                            text: 'Ingresa con Google',
+                            icon: isGoogleButtonLoading
+                                ? const SpinKitCircle(
+                                    color: Colors.white,
+                                    size: 25.0,
+                                  )
+                                : const Icon(
+                                    FontAwesomeIcons.google,
+                                    size: 20,
+                                    color: Colors.white,
+                                  ),
+                            options: const ButtonOptions(
+                              iconPadding: EdgeInsets.only(left: 20),
+                              width: 300,
+                              height: 40,
+                              color: Colors.white10,
+                              borderSide: BorderSide(
+                                color: Colors.white,
+                                width: 1,
+                              ),
+                              borderRadius: BorderRadius.only(
+                                bottomLeft: Radius.circular(20),
+                                bottomRight: Radius.circular(20),
+                                topLeft: Radius.circular(20),
+                                topRight: Radius.circular(20),
+                              ),
+                              textStyle: TextStyle(color: Colors.white),
                             ),
-                            borderRadius: BorderRadius.only(
-                              bottomLeft: Radius.circular(20),
-                              bottomRight: Radius.circular(20),
-                              topLeft: Radius.circular(20),
-                              topRight: Radius.circular(20),
-                            ),
-                            textStyle: TextStyle(color: Colors.white),
                           ),
                         ),
-                      ),
-                      Align(
-                        alignment: const AlignmentDirectional(0, 0),
-                        child: ButtonWidget(
-                          onPressed: () {
-                            isGoogleButtonLoading ? null : handleAppleSignIn();
-                          },
-                          text: 'Ingresa con Apple',
-                          icon: const FaIcon(
-                            FontAwesomeIcons.apple,
-                            size: 26,
-                            color: Colors.white,
-                          ),
-                          options: const ButtonOptions(
-                            iconPadding: EdgeInsets.only(left: 20),
-                            width: 300,
-                            height: 40,
-                            color: Colors.white10,
-                            borderSide: BorderSide(
+                        Align(
+                          alignment: const AlignmentDirectional(0, 0),
+                          child: ButtonWidget(
+                            onPressed: () {
+                              isGoogleButtonLoading
+                                  ? null
+                                  : handleAppleSignIn();
+                            },
+                            text: 'Ingresa con Apple',
+                            icon: const FaIcon(
+                              FontAwesomeIcons.apple,
+                              size: 26,
                               color: Colors.white,
-                              width: 1,
                             ),
-                            borderRadius: BorderRadius.only(
-                              bottomLeft: Radius.circular(20),
-                              bottomRight: Radius.circular(20),
-                              topLeft: Radius.circular(20),
-                              topRight: Radius.circular(20),
+                            options: const ButtonOptions(
+                              iconPadding: EdgeInsets.only(left: 20),
+                              width: 300,
+                              height: 40,
+                              color: Colors.white10,
+                              borderSide: BorderSide(
+                                color: Colors.white,
+                                width: 1,
+                              ),
+                              borderRadius: BorderRadius.only(
+                                bottomLeft: Radius.circular(20),
+                                bottomRight: Radius.circular(20),
+                                topLeft: Radius.circular(20),
+                                topRight: Radius.circular(20),
+                              ),
+                              textStyle: TextStyle(color: Colors.white),
                             ),
-                            textStyle: TextStyle(color: Colors.white),
                           ),
                         ),
-                      ),
-                      Align(
-                        alignment: const AlignmentDirectional(0, 0),
-                        child: ButtonWidget(
-                          onPressed: () async {
-                            nextScreenReplace(context, const PhoneAuthScreen());
-                            phoneController.reset();
-                          },
-                          text: 'Ingresa con tu número',
-                          icon: const Icon(
-                            Icons.phone_iphone_sharp,
-                            size: 26,
-                            color: Colors.white,
-                          ),
-                          options: const ButtonOptions(
-                            iconPadding: EdgeInsets.only(left: 20),
-                            width: 300,
-                            height: 40,
-                            color: Colors.white10,
-                            borderSide: BorderSide(
+                        Align(
+                          alignment: const AlignmentDirectional(0, 0),
+                          child: ButtonWidget(
+                            onPressed: () async {
+                              nextScreenReplace(
+                                  context, const PhoneAuthScreen());
+                              phoneController.reset();
+                            },
+                            text: 'Ingresa con tu número',
+                            icon: const Icon(
+                              Icons.phone_iphone_sharp,
+                              size: 26,
                               color: Colors.white,
-                              width: 1,
                             ),
-                            borderRadius: BorderRadius.only(
-                              bottomLeft: Radius.circular(20),
-                              bottomRight: Radius.circular(20),
-                              topLeft: Radius.circular(20),
-                              topRight: Radius.circular(20),
+                            options: const ButtonOptions(
+                              iconPadding: EdgeInsets.only(left: 20),
+                              width: 300,
+                              height: 40,
+                              color: Colors.white10,
+                              borderSide: BorderSide(
+                                color: Colors.white,
+                                width: 1,
+                              ),
+                              borderRadius: BorderRadius.only(
+                                bottomLeft: Radius.circular(20),
+                                bottomRight: Radius.circular(20),
+                                topLeft: Radius.circular(20),
+                                topRight: Radius.circular(20),
+                              ),
+                              textStyle: TextStyle(color: Colors.white),
                             ),
-                            textStyle: TextStyle(color: Colors.white),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

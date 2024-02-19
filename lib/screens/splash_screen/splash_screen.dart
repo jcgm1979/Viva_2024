@@ -1,7 +1,7 @@
 import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import 'package:provider/provider.dart';
 import 'package:viva_2024/screens/login_screen.dart';
 import 'package:viva_2024/screens/radio_screen.dart';
@@ -25,8 +25,8 @@ class _SplashScreenState extends State<SplashScreen> {
     // create a timer of 2 seconds
     Timer(const Duration(seconds: 2), () {
       sp.isSignedIn == false
-          ? nextScreen(context, const LoginScreen())
-          : nextScreen(context, const RadioScreen());
+          ? nextScreenReplace(context, const LoginScreen())
+          : nextScreenReplace(context, const RadioScreen());
     });
   }
 

@@ -1,12 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 class SignInProvider extends ChangeNotifier {
   // instance of firebaseauth, facebook and google
-  final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+  final FirebaseAuth firebaseAuth =
+      FirebaseAuth.instanceFor(app: Firebase.app('viva-fm-smart-ced7c'));
   final GoogleSignIn googleSignIn = GoogleSignIn();
 
   bool _isSignedIn = false;
@@ -103,49 +106,72 @@ class SignInProvider extends ChangeNotifier {
     }
   }
 
-  Future<UserCredential> getCredentials() async {
-    AppleAuthProvider appleProvider = AppleAuthProvider();
-    appleProvider = appleProvider.addScope('email');
-    appleProvider = appleProvider.addScope('name');
-    final credential =
-        await FirebaseAuth.instance.signInWithProvider(appleProvider);
-    return credential;
+  Future<AuthCredential?> getAppleCredentials() async {
+    try {
+      final result = await SignInWithApple.getAppleIDCredential(
+        scopes: [
+          AppleIDAuthorizationScopes.email,
+          AppleIDAuthorizationScopes.fullName,
+        ],
+      );
+
+      final AuthCredential credential = OAuthProvider("apple.com").credential(
+        idToken: result.identityToken,
+        accessToken: result.authorizationCode,
+      );
+
+      return credential;
+    } catch (error) {
+      print("Error obtaining Apple credentials: $error");
+      return null;
+    }
   }
 
-  // sign in with google
-  Future signInWithApple() async {
-    final userCredentials = await getCredentials();
+  // Iniciar sesión con Apple y autenticar en Firebase
+  Future<void> signInWithApple() async {
     try {
-      final User userDetails =
-          (await firebaseAuth.signInWithCredential(userCredentials.credential!))
-              .user!;
+      final AuthCredential? appleCredentials = await getAppleCredentials();
 
-      _name = userDetails.displayName;
-      _email = userDetails.email;
-      _imageUrl = userDetails.photoURL;
-      _provider = 'APPLE';
-      _uid = userDetails.uid;
+      if (appleCredentials != null) {
+        final UserCredential userCredential =
+            await firebaseAuth.signInWithCredential(appleCredentials);
 
-      notifyListeners();
+        final User userDetails = userCredential.user!;
+
+        _name = userDetails.displayName ?? "";
+        _email = userDetails.email ?? "";
+        _imageUrl = userDetails.photoURL ?? "";
+        _provider = 'APPLE';
+        _uid = userDetails.uid;
+
+        notifyListeners();
+      } else {
+        // Manejar el caso en que las credenciales de Apple son nulas
+        _errorCode = "Unable to obtain Apple credentials";
+        _hasError = true;
+        notifyListeners();
+      }
     } on FirebaseAuthException catch (e) {
+      print("Firebase Auth Exception: ${e.code}");
+
       switch (e.code) {
         case "account-exists-with-different-credential":
           _errorCode =
               "You already have an account with us. Use correct provider";
           _hasError = true;
-          notifyListeners();
           break;
 
         case "null":
           _errorCode = "Some unexpected error while trying to sign in";
           _hasError = true;
-          notifyListeners();
           break;
+
         default:
           _errorCode = e.toString();
           _hasError = true;
-          notifyListeners();
       }
+
+      notifyListeners();
     }
   }
 

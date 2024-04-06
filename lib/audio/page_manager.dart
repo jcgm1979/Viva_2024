@@ -1,25 +1,25 @@
-import 'package:audio_service/audio_service.dart';
 
+import 'package:audio_service/audio_service.dart';
+//TODO: FILE ACTUALIZADO.
 import 'play_button_notifier.dart';
 import 'playlist_repository.dart';
 import 'service_locator.dart';
 
 class PageManager {
   final playButtonNotifier = PlayButtonNotifier();
+  final playButtonPageNotifier = PlayButtonPageNotifier();
   final _audioHandler = getIt<AudioHandler>();
 
   // Events: Calls coming from the UI
-  void init(PlaylistType type) async {
-    await _loadPlaylist(type);
+  void init() async {
+    await _loadPlaylist();
 
     _listenToPlaybackState();
   }
 
-  Future<void> _loadPlaylist(PlaylistType type) async {
+  Future<void> _loadPlaylist() async {
     final songRepository = getIt<PlaylistRepository>();
-    final playlist = await songRepository.fetchInitialPlaylist(
-      type,
-    );
+    final playlist = await songRepository.fetchInitialPlaylist();
     final mediaItems = playlist
         .map((song) => MediaItem(
               id: song['id'] ?? '',

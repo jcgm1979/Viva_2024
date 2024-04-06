@@ -1,5 +1,4 @@
 // ignore_for_file: avoid_print
-
 import 'dart:developer';
 
 import 'package:audio_service/audio_service.dart';
@@ -134,7 +133,7 @@ class MyAudioHandler extends BaseAudioHandler {
   }
 
   @override
-  Future<void> playFromUri(Uri uri, [Map<String, dynamic>? extras]) async {    
+  Future<void> playFromUri(Uri uri, [Map<String, dynamic>? extras]) async {
     _playlist.removeAt(0);
     _playlist.insert(0, AudioSource.uri(uri));
     await _player.setAudioSource(_playlist);

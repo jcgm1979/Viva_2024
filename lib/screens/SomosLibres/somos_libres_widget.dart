@@ -3,10 +3,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:viva_2024/audio/play_button_notifier.dart';
 
 import '../../audio/play_button.dart';
 import '../radio_screen.dart';
-
+//TODO: FILE ACTUALIZADO.
 class SomosLibresWidget extends StatefulWidget {
   const SomosLibresWidget({Key? key}) : super(key: key);
 
@@ -179,7 +180,10 @@ class _SomosLibresWidgetState extends State<SomosLibresWidget>
                                             ],
                                           ),
                                         ),
-                                        PlayButton(id: 2)
+                                        PlayButton(
+                                          ButtonPage.somosLibres
+                                          ,
+                                        id: 2)
                                       ],
                                     ),
                                   )

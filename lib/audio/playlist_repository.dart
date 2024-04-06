@@ -1,6 +1,6 @@
+//TODO: FILE ACTUALIZADO.
 abstract class PlaylistRepository {
-  Future<List<Map<String, String>>> fetchInitialPlaylist(PlaylistType type,
-      {int length = 3});
+  Future<List<Map<String, String>>> fetchInitialPlaylist();
   Future<Map<String, String>> fetchAnotherSong(
     PlaylistType type,
   );
@@ -10,8 +10,7 @@ enum PlaylistType { serverOne, serverTwo }
 
 class DemoPlaylist extends PlaylistRepository {
   @override
-  Future<List<Map<String, String>>> fetchInitialPlaylist(PlaylistType type,
-      {int length = 3}) async {
+  Future<List<Map<String, String>>> fetchInitialPlaylist() async {
     return _serverviva();
   }
 

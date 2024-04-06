@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:viva_2024/audio/playlist_repository.dart';
 import 'package:viva_2024/screens/viva_tec/viva_tec_widget.dart';
 
 import '../audio/page_manager.dart';
 import '../audio/play_button.dart';
+import '../audio/play_button_notifier.dart';
 import '../audio/service_locator.dart';
 import '../providers/artista_cancion.dart';
 import 'SomosLibres/somos_libres_widget.dart';
@@ -17,7 +17,7 @@ import 'noticias/noticias_widget.dart';
 import 'podcast/podcast_widget.dart';
 import 'ranking/ranking_viva_widget.dart';
 import 'ratas/ratas_widget.dart';
-
+//TODO: FILE ACTUALIZADO.
 class RadioScreen extends StatefulWidget {
   const RadioScreen({super.key});
 
@@ -31,7 +31,7 @@ class _RadioScreenState extends State<RadioScreen> {
     super.initState();
 
     //Audio
-    getIt<PageManager>().init(PlaylistType.serverOne);
+    getIt<PageManager>().init();
   }
 
   @override
@@ -673,7 +673,8 @@ class _RadioScreenState extends State<RadioScreen> {
                                             print('IconButton pressed ...');
                                           },
                                         ),
-                                        const PlayButton(id: 1),
+                                        const PlayButton(ButtonPage.radio,
+                                            id: 1),
                                         IconButton(
                                           icon: const Icon(
                                             Icons.thumb_down_rounded,

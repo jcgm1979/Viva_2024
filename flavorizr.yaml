@@ -1,0 +1,27 @@
+flavors:
+  dev:
+    app:
+      name: "Viva Fm Dev"
+    android:
+      applicationId: "crdappsperu.viva_fm_smart.dev"
+      icons: "assets/logo-app-1024x1024.png"
+      firebase:
+        config: "firebase_files/android/dev/google-services.json"
+    ios:
+      bundleId: "com.crdappsperu.viva-fm-smart.dev"
+      icons: "assets/logo-app-1024x1024.png"
+      firebase:
+        config: "firebase_files/ios/dev/GoogleService-Info.plist"
+  prod:
+    app:
+      name: "Viva Fm"
+    android:
+      applicationId: "crdappsperu.viva_fm_smart"
+      icons: "assets/logo-app-1024x1024.png"
+      firebase:
+        config: "firebase_files/android/prod/google-services.json"
+    ios:
+      bundleId: "com.crdappsperu.viva-fm-smart"
+      icons: "assets/logo-app-1024x1024.png"
+      firebase:
+        config: "firebase_files/ios/prod/GoogleService-Info.plist"

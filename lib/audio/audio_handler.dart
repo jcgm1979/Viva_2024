@@ -1,5 +1,7 @@
 // ignore_for_file: avoid_print
 
+import 'dart:developer';
+
 import 'package:audio_service/audio_service.dart';
 import 'package:just_audio/just_audio.dart';
 
@@ -85,6 +87,7 @@ class MyAudioHandler extends BaseAudioHandler {
   @override
   Future<void> addQueueItem(MediaItem mediaItem) async {
     // manage Just Audio
+    log('mediaItem: $mediaItem');
     final audioSource = _createAudioSource(mediaItem);
     _playlist.add(audioSource);
 
@@ -131,17 +134,10 @@ class MyAudioHandler extends BaseAudioHandler {
   }
 
   @override
-  Future<void> playFromUri(Uri uri, [Map<String, dynamic>? extras]) async {
-    // Pausa la reproducción actual si está reproduciendo
-    if (_player.playing) {
-      await _player.pause();
-    }
-
-    // Reemplaza la URL en la fuente de audio
+  Future<void> playFromUri(Uri uri, [Map<String, dynamic>? extras]) async {    
+    _playlist.removeAt(0);
     _playlist.insert(0, AudioSource.uri(uri));
     await _player.setAudioSource(_playlist);
-
-    // Inicia la reproducción nuevamente si estaba reproduciendo antes de cambiar la URL
     if (!playbackState.value.playing) {
       await _player.play();
     }

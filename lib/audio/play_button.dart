@@ -5,8 +5,8 @@ import 'play_button_notifier.dart';
 import 'service_locator.dart';
 
 class PlayButton extends StatelessWidget {
-  const PlayButton({this.url, Key? key}) : super(key: key);
-  final String? url;
+  const PlayButton({this.id, Key? key}) : super(key: key);
+  final int? id;
   @override
   Widget build(BuildContext context) {
     final pageManager = getIt<PageManager>();
@@ -38,8 +38,8 @@ class PlayButton extends StatelessWidget {
                     child: const Icon(Icons.play_arrow_rounded)),
                 iconSize: 30.0,
                 onPressed: () {
-                  if (url != null) {
-                    pageManager.playFromUrl(url!);
+                  if (id != null) {
+                    pageManager.playFromUrl(id!);
                   } else {
                     pageManager.play();
                   }

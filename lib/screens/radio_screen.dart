@@ -673,8 +673,7 @@ class _RadioScreenState extends State<RadioScreen> {
                                             print('IconButton pressed ...');
                                           },
                                         ),
-                                        const PlayButton(
-                                            url: 'https://tupanel.info:8780/'),
+                                        const PlayButton(id: 1),
                                         IconButton(
                                           icon: const Icon(
                                             Icons.thumb_down_rounded,

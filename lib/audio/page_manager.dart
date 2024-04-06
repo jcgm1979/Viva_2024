@@ -50,7 +50,15 @@ class PageManager {
 
   void play() => _audioHandler.play();
   void pause() => _audioHandler.pause();
-  void playFromUrl(String url) => _audioHandler.playFromUri(Uri.parse(url));
+  void playFromUrl(int id) {
+    final mediaItem = _audioHandler.queue.value.firstWhere(
+      (element) => element.id == id.toString(),
+    );
+    _audioHandler.playFromUri(
+      Uri.parse(mediaItem.extras!['url'] as String),
+      mediaItem.extras,
+    );
+  }
 
   void remove() {
     final lastIndex = _audioHandler.queue.value.length - 1;

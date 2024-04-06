@@ -179,8 +179,7 @@ class _SomosLibresWidgetState extends State<SomosLibresWidget>
                                             ],
                                           ),
                                         ),
-                                        PlayButton(
-                                            url: 'https://tupanel.info:9950/')
+                                        PlayButton(id: 2)
                                       ],
                                     ),
                                   )

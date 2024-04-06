@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 abstract class PlaylistRepository {
   Future<List<Map<String, String>>> fetchInitialPlaylist(PlaylistType type,
       {int length = 3});
@@ -14,34 +12,14 @@ class DemoPlaylist extends PlaylistRepository {
   @override
   Future<List<Map<String, String>>> fetchInitialPlaylist(PlaylistType type,
       {int length = 3}) async {
-    return List.generate(length, (index) {
-      switch (type) {
-        case PlaylistType.serverOne:
-          return _serverviva();
-        case PlaylistType.serverTwo:
-          return _servervivaTwo();
-      }
-    });
+    return _serverviva();
   }
 
   @override
   Future<Map<String, String>> fetchAnotherSong(
     PlaylistType type,
   ) async {
-    switch (type) {
-      case PlaylistType.serverOne:
-        log('serverOne');
-        return _serverviva();
-      case PlaylistType.serverTwo:
-        log('serverTwo');
-        return _servervivaTwo();
-    }
-  }
-
-  Map<String, String> _serverviva() {
-    return {
-      'url': 'https://tupanel.info:8780/' //Nuevo URL viva//
-    };
+    return _servervivaTwo();
   }
 
   //Server nuevo
@@ -50,4 +28,19 @@ class DemoPlaylist extends PlaylistRepository {
       'url': 'https://tupanel.info:9950/' //Nuevo URL viva//
     };
   }
+}
+
+List<Map<String, String>> _serverviva() {
+  return [
+    {
+      'id': '1',
+      'title': 'Principal',
+      'url': 'https://tupanel.info:8780/',
+    },
+    {
+      'id': '2',
+      'title': 'Somos Libres',
+      'url': 'https://tupanel.info:9950/' //Nuevo URL viva//
+    }
+  ];
 }
